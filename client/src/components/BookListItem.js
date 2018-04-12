@@ -8,8 +8,7 @@ const BookListItem = ({ book }) => {
   let image = book.volumeInfo && book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'www.noimage.com';
 
   return (
-    <div>BookListItem: {book.id} 
-      <h1>{book.number + 1}</h1>
+    <div>BookListItem:
       <ul>
         <li>title: {title} ${price}</li>
         <li>publishedDate: {publishedDate}</li>

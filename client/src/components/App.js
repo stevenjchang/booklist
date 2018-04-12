@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import BookList from './BookList';
+import BooksContainer from '../containers/BooksContainer'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getBooksFromGoogle();
+    // this.getBooksFromGoogle();
   }
 
   getBooksFromGoogle() {
@@ -59,7 +60,7 @@ class App extends React.Component {
           onClick={() => this.handleClick()}
           className="btn btn-warning"
         >SORT by price!</button>
-        <BookList books={this.state.books} />
+        <BooksContainer />
       </div>
     )
   }

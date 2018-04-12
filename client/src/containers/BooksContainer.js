@@ -4,15 +4,13 @@ import BookList from '../components/BookList';
 
 const mapStateToProps = (state) => {
   return {
-    list: state.books,
+    books: state.bookReducer,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClickGetJobs: () => {
-      dispatch(getGoogleBooks());
-    },
+    onClickGetGoogleBooks: () => dispatch(getGoogleBooks()),
   };
 };
 
