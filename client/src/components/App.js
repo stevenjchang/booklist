@@ -21,6 +21,7 @@ class App extends React.Component {
       .then((results) => {
         let data = results.data.items;
         this.setState({ books: data});
+        console.log('books ==>', this.state.books);
       })
   }
   render() {
