@@ -4,7 +4,14 @@ import BookListItem from './BookListItem';
 const BookList = ({books}) => (
   <div>
     <h2>BookList</h2>
-    { books.map(item => <BookListItem book={item} key={item.etag} />) }
+    { books.map((item, index) => <BookListItem 
+        book={item}
+        key={item.etag}
+        index={index}
+      /> 
+    ) 
+
+  }
   </div>
 )
 

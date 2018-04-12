@@ -14,6 +14,7 @@ class BookListItem extends React.Component {
 
     return (
       <div>BookListItem: {book.id} 
+        <h1>{this.props.index + 1}</h1>
         <ul>
           <li>title: {title} ${price}</li>
           <li>publishedDate: {publishedDate}</li>

@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       books: [{id: 1}, {id: 2}, {id: 3}],
     };
+    this.sortBooks = this.sortBooks.bind(this);
   }
 
   componentDidMount() {
@@ -24,9 +25,24 @@ class App extends React.Component {
         console.log('books ==>', this.state.books);
       })
   }
+
+  handleClick() {
+    this.sortBooks(this.state.books);
+  }
+
+  sortBooks(originalList) {
+    this.setState({ books: originalList.reverse() });
+  }
+
   render() {
     return (
-      <BookList books={this.state.books} />
+      <div>
+        <button 
+          onClick={() => this.handleClick()}
+          className="btn btn-warning"
+        >SORT Books NOW!</button>
+        <BookList books={this.state.books} />
+      </div>
     )
   }
 }
