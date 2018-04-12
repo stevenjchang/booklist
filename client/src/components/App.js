@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import BookList from './BookList';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +22,7 @@ class App extends React.Component {
         let data = results.data.items;
         let cleanData = data.map((item, index) => {
           let list = item;
+          list.number = index;
           if (!list) {
             return {}
           }
@@ -32,13 +32,12 @@ class App extends React.Component {
           if (!list.saleInfo.retailPrice) {
             list.saleInfo.retailPrice = {};
           }
-          if (!list.saleInfo.retailPrice || !list.saleInfo.retailPrice.amount) {
+          if (!list.saleInfo.retailPrice.amount) {
             list.saleInfo.retailPrice.amount = 1;
           }
           return list;
         })
         this.setState({ books: cleanData});
-        console.log('books ==>', this.state.books);
       })
   }
 
@@ -50,7 +49,6 @@ class App extends React.Component {
     let sortedList = originalList.sort((a,b) => {
       return b.saleInfo.retailPrice.amount - a.saleInfo.retailPrice.amount;
     });
-    console.log('sortedList ==>', sortedList);
     this.setState({ books: sortedList });
   }
 
@@ -60,7 +58,7 @@ class App extends React.Component {
         <button 
           onClick={() => this.handleClick()}
           className="btn btn-warning"
-        >SORT Books NOW!</button>
+        >SORT by price!</button>
         <BookList books={this.state.books} />
       </div>
     )

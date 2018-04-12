@@ -10,7 +10,6 @@ const BookList = ({books}) => (
         index={index}
       /> 
     ) 
-
   }
   </div>
 )
