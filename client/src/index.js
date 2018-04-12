@@ -1,5 +1,21 @@
 import React from 'react';
 import { render } from 'react-dom';
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+
+import rootReducer from './reducers';
 import App from './components/App';
 
-render(<App/>, document.getElementById('app'));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk)),
+);
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
