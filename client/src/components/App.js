@@ -21,7 +21,23 @@ class App extends React.Component {
     axios.get('https://www.googleapis.com/books/v1/volumes?q=software&maxResults=40')
       .then((results) => {
         let data = results.data.items;
-        this.setState({ books: data});
+        let cleanData = data.map((item, index) => {
+          let list = item;
+          if (!list) {
+            return {}
+          }
+          if (!list.volumeInfo) {
+            list.volumeInfo = { title: 'notitle', publishedDate: 'nopublisheddate' };
+          }
+          if (!list.saleInfo.retailPrice) {
+            list.saleInfo.retailPrice = {};
+          }
+          if (!list.saleInfo.retailPrice || !list.saleInfo.retailPrice.amount) {
+            list.saleInfo.retailPrice.amount = 1;
+          }
+          return list;
+        })
+        this.setState({ books: cleanData});
         console.log('books ==>', this.state.books);
       })
   }
@@ -31,7 +47,11 @@ class App extends React.Component {
   }
 
   sortBooks(originalList) {
-    this.setState({ books: originalList.reverse() });
+    let sortedList = originalList.sort((a,b) => {
+      return b.saleInfo.retailPrice.amount - a.saleInfo.retailPrice.amount;
+    });
+    console.log('sortedList ==>', sortedList);
+    this.setState({ books: sortedList });
   }
 
   render() {
